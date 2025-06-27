@@ -1,0 +1,28 @@
+# ---------------- docker-compose.yml ----------------
+version: '3'
+services:
+  sensor_service:
+    build: ./sensor_service
+    depends_on:
+      - collector_service
+    networks:
+      - red
+
+  collector_service:
+    build: ./collector_service
+    networks:
+      - red
+
+  storage_service:
+    build: ./storage_service
+    networks:
+      - red
+
+  alert_service:
+    build: ./alert_service
+    networks:
+      - red
+
+networks:
+  red:
+    driver: bridge
