@@ -1,0 +1,23 @@
+version: "3"
+services:
+  sensor_service:
+    build: ./sensor_service
+    depends_on:
+      - collector_service
+    ports:
+      - "5000:5000"
+
+  collector_service:
+    build: ./collector_service
+    ports:
+      - "5001:5001"
+
+  storage_service:
+    build: ./storage_service
+    ports:
+      - "5002:5002"
+
+  alert_service:
+    build: ./alert_service
+    ports:
+      - "5003:5003"
