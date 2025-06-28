@@ -1,0 +1,35 @@
+version: '3'
+services:
+  sensor_service:
+    build: ./sensor_service
+    depends_on:
+      - collector_service
+    networks:
+      - red
+    ports:
+      - "5000:5000"  # Exponer puerto 5000 del contenedor al host
+
+  collector_service:
+    build: ./collector_service
+    networks:
+      - red
+    ports:
+      - "5001:5001"  # Puerto para el servicio collector
+
+  storage_service:
+    build: ./storage_service
+    networks:
+      - red
+    ports:
+      - "5002:5002"  # Puerto para almacenamiento
+
+  alert_service:
+    build: ./alert_service
+    networks:
+      - red
+    ports:
+      - "5003:5003"  # Puerto para alertas
+
+networks:
+  red:
+    driver: bridge
